@@ -7,47 +7,61 @@ public class MyDeque<E>{
   public MyDeque(){
     data = (E[])new Object[10];
     size = 0;
-    start = 0;
-    end = 0;
+    start = (data.length/2)-1;
+    end = start;
   }
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     size = 0;
-    start = 0;
-    end = 0;
+    start = (initialCapacity/2)-1;
+    end = start;
   }
   public int size(){
     return size;
   }
 
   public String toString(){
+    if (size == 0) {
+      return "{}";
+    }
     String ary = "{";
     if (end < start) {
       for (int i = start; i < data.length; i++ ) {
-        ary += data[i] + ", ";
+        if (data[i] != null) {
+          ary += data[i] + " ";
+        }
       }
       for (int i = 0; i <= end; i++) {
-        ary += data[i] + ", ";
+        if (data[i] != null) {
+          ary += data[i] + " ";
+        }
       }
     }
     else {
       for (int i = 0; i < data.length; i++) {
-        ary += data[i] + ", ";
+        if (data[i] != null) {
+          ary += data[i] + " ";
+        }
       }
     }
-    ary = ary.substring(ary.length()-2);
+    ary = ary.substring(0,ary.length()-1);
     ary+= "}";
     return ary;
   }
 
   public void addFirst(E element){
+    if (element == null) {
+      throw new NullPointerException("n");
+    }
     if (size == 0) {
       data[start] = element;
     }
     else if (start == 0){
-      //resize thingy? or shift over?
+      resize();
+      data[start-1] = element;
+      start--;
     }
     else {
       data[start-1] = element;
@@ -57,9 +71,21 @@ public class MyDeque<E>{
   }
 
   public void addLast(E element){
+    if (element == null) {
+      throw new NullPointerException("n");
+    }
     if (size == 0) {
       data[end] = element;
 
+    }
+    else if (end == data.length-1) {
+      resize();
+      data[end+1] = element;
+      end++;
+    }
+    else {
+      data[end+1] = element;
+      end++;
     }
 
     size++;
@@ -68,28 +94,28 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public void resize() {
     E[] d = (E[])new Object[2*data.length];
-    int index = 0;
+    int index = (d.length/3);
     if (end < start) {
       for (int i = start; i < data.length; i++) {
         d[index] = data[i];
         index++;
       }
-      for (int i = 0; i < end; i++) {
+      for (int i = 0; i <= end; i++) {
         d[index] = data[i];
         index++;
       }
     }
     else {
-      for (int i = start; i < end; i++) {
+      for (int i = start; i <= end; i++) {
         d[index] = data[i];
         index++;
       }
     }
-    start = 0;
+    start = (d.length/3);
     end = index--;
     data = d;
   }
-  
+
   public E removeFirst(){
     if (size == 0) {
       throw new NoSuchElementException("e");
