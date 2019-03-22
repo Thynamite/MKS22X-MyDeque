@@ -65,17 +65,34 @@ public class MyDeque<E>{
     size++;
   }
 
-  public int[] resize() {
-    int[] d = new int[2*data.length];
+  @SuppressWarnings("unchecked")
+  public void resize() {
+    E[] d = (E[])new Object[2*data.length];
+    int index = 0;
     if (end < start) {
       for (int i = start; i < data.length; i++) {
-        d[]
+        d[index] = data[i];
+        index++;
+      }
+      for (int i = 0; i < end; i++) {
+        d[index] = data[i];
+        index++;
       }
     }
+    else {
+      for (int i = start; i < end; i++) {
+        d[index] = data[i];
+        index++;
+      }
+    }
+    start = 0;
+    end = index--;
+    data = d;
   }
+  
   public E removeFirst(){
     if (size == 0) {
-      throw new NoSuchElementException(e);
+      throw new NoSuchElementException("e");
     }
     E a = data[start];
     data[start] = null;
@@ -85,7 +102,7 @@ public class MyDeque<E>{
   }
   public E removeLast(){
     if (size == 0) {
-      throw new NoSuchElementException(e);
+      throw new NoSuchElementException("e");
     }
     E a = data[end];
     data[end] = null;
@@ -95,13 +112,13 @@ public class MyDeque<E>{
   }
   public E getFirst(){
     if (size == 0) {
-      throw new NoSuchElementException(e);
+      throw new NoSuchElementException("e");
     }
     return data[start];
   }
   public E getLast(){
     if (size == 0) {
-      throw new NoSuchElementException(e);
+      throw new NoSuchElementException("e");
     }
     return data[end];
   }
