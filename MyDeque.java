@@ -1,4 +1,4 @@
-import java.util.Objects;
+import java.util.NoSuchElementException;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -74,6 +74,9 @@ public class MyDeque<E>{
     }
   }
   public E removeFirst(){
+    if (size == 0) {
+      throw new NoSuchElementException(e);
+    }
     E a = data[start];
     data[start] = null;
     start++;
@@ -81,6 +84,9 @@ public class MyDeque<E>{
     return a;
   }
   public E removeLast(){
+    if (size == 0) {
+      throw new NoSuchElementException(e);
+    }
     E a = data[end];
     data[end] = null;
     end--;
@@ -88,9 +94,15 @@ public class MyDeque<E>{
     return a;
   }
   public E getFirst(){
+    if (size == 0) {
+      throw new NoSuchElementException(e);
+    }
     return data[start];
   }
   public E getLast(){
+    if (size == 0) {
+      throw new NoSuchElementException(e);
+    }
     return data[end];
   }
 }
