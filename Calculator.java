@@ -21,15 +21,18 @@ public class Calculator{
       */
 
       for (int i = 0; i < list.size(); i ++) {
-        try {
+        if (checkOp(list.get(i))) {
 
+        }
+        else {
+          stack.addFirst((Double)list.get(i))
         }
       }
       return 0;
     }
 
     public static boolean checkOp(String token) {
-      String[] operations = {"+", "-", "*", "/", "%"};
+      String[] operations = {"+", "-", "*", "/", "%"}; //maybe return a number for the non communative
 
       for (int x = 0; x < operations.length; x++) {
         if (token.equals(operations[x])) {
