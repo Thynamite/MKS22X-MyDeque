@@ -79,9 +79,27 @@ public class MyDeque<E>{
 
     }
     else if (end == data.length-1) {
-      resize();
-      data[end+1] = element;
-      end++;
+      /*
+      if (start > 0) {
+        for (int x = 0; x < start; x++) {
+          end = x;
+          if (data[end] == null) {
+            data[end] = element;
+            x = start + 1;
+          }
+        }
+        if (data[start-1] != null) {
+          resize();
+          data[end+1] = element;
+          end++;
+        }
+      }
+      else {
+      */
+        resize();
+        data[end+1] = element;
+        end++;
+    //  }
     }
     else {
       data[end+1] = element;
