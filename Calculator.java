@@ -19,9 +19,25 @@ public class Calculator{
         System.out.println(list.get(x));
       }
       */
+
+      for (int i = 0; i < list.size(); i ++) {
+        try {
+
+        }
+      }
       return 0;
     }
 
+    public static boolean checkOp(String token) {
+      String[] operations = {"+", "-", "*", "/", "%"};
+
+      for (int x = 0; x < operations.length; x++) {
+        if (token.equals(operations[x])) {
+          return true;
+        }
+      }
+      return false;
+    }
     public static void main(String[] args) {
       eval("1 2 3 4 5 + * - -");
     }
