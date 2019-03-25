@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 public class MyDeque<E>{
   private E[] data;
-  private int size, start, end;
+  public int size, start, end;
 
   @SuppressWarnings("unchecked")
   public MyDeque(){
@@ -26,28 +26,28 @@ public class MyDeque<E>{
     if (size == 0) {
       return "{}";
     }
-    String ary = "{";
+    String ary = "[";
     if (end < start) {
       for (int i = start; i < data.length; i++ ) {
         if (data[i] != null) {
-          ary += data[i] + " ";
+          ary += data[i] + ", ";
         }
       }
       for (int i = 0; i <= end; i++) {
         if (data[i] != null) {
-          ary += data[i] + " ";
+          ary += data[i] + ", ";
         }
       }
     }
     else {
       for (int i = 0; i < data.length; i++) {
         if (data[i] != null) {
-          ary += data[i] + " ";
+          ary += data[i] + ", ";
         }
       }
     }
-    ary = ary.substring(0,ary.length()-1);
-    ary+= "}";
+    ary = ary.substring(0,ary.length()-2);
+    ary+= "]";
     return ary;
   }
 
@@ -95,7 +95,7 @@ public class MyDeque<E>{
   public void resize() {
     E[] d = (E[])new Object[2*data.length];
     int index = (d.length/3);
-    if (end < start) {
+    if (end < start) {   //just to make everything in order when the end is before start
       for (int i = start; i < data.length; i++) {
         d[index] = data[i];
         index++;
@@ -131,7 +131,7 @@ public class MyDeque<E>{
       throw new NoSuchElementException("e");
     }
     E a = data[end];
-    data[end] = null;
+    data[end] = null; //theoretically not needed, but just to make it look better?
     end--;
     size--;
     return a;
