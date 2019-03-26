@@ -18,8 +18,8 @@ public class Drive{
 
     f.addLast(1000);
     System.out.println(f);
-    System.out.println(f.start);
-    System.out.println(f.end);
+    //System.out.println(f.start);
+    //System.out.println(f.end);
     System.out.println(f.size());
     System.out.println(f.getLast());
     System.out.println(f.getFirst());
