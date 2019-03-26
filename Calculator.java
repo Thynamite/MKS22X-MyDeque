@@ -14,29 +14,27 @@ public class Calculator{
       while(string.hasNext()) {
         String dummy = string.next();
         //System.out.println(dummy);
-        if (checkOp(dummy)) {
+        int index = checkOp(dummy);
+        if (index != -1) {
           Double first = stack.removeFirst();
           Double second = stack.removeFirst();
-          if (dummy.equals("-")) {
-            Double ans = second - first;
-            stack.addFirst(ans);
+          Double ans = 0.0; //jsut to make it initialize, only would go into stack if a different operation is used other than given
+          if (index == 0) {
+            ans = first + second;
           }
-          if (dummy.equals("/")) {
-            Double ans = second / first;
-            stack.addFirst(ans);
+          if (index == 1) {
+            ans = second - first;
           }
-          if (dummy.equals("%")) {
-            Double ans = second % first;
-            stack.addFirst(ans);
+          if (index == 2) {
+            ans = first * second;
           }
-          if (dummy.equals("*")) {
-            Double ans = first * second;
-            stack.addFirst(ans);
+          if (index == 3) {
+            ans = second / first;
           }
-          if (dummy.equals("+")) {
-            Double ans = first + second;
-            stack.addFirst(ans);
+          if (index == 4) {
+            ans = second % first;
           }
+          stack.addFirst(ans);
         }
         else {
           stack.addFirst(Double.parseDouble(dummy));
@@ -51,17 +49,24 @@ public class Calculator{
       return stack.getFirst();
     }
 
-    public static boolean checkOp(String token) {
+    public static int checkOp(String token) {
       String[] operations = {"+", "-", "*", "/", "%"}; //maybe return a number for the non communative
 
       for (int x = 0; x < operations.length; x++) {
         if (token.equals(operations[x])) {
-          return true;
+          return x;
         }
       }
-      return false;
+      return -1;
     }
+    /*
     public static void main(String[] args) {
-      eval("1 2 3 4 5 + * - -");
+
+      System.out.println(eval("1 2 3 4 5 + * - -")); //-24
+      System.out.println(eval("10 2.0 +"));          //12.0
+      System.out.println(eval("11 3 - 4 + 2.5 *"));           //30.0
+      System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));       //893.0
+      System.out.println(eval("1 2 3 4 5 + * - -"));            //26.0
     }
+    */
 }
